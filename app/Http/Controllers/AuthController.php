@@ -19,7 +19,7 @@ class AuthController extends Controller
         }
 
         if (Auth::attempt($validated)) {
-            redirect()->route('home');
+            return redirect()->route('home');
         } else {
             return back()->withErrors([
                 'errors' => 'The provided credentials does not match our records'
