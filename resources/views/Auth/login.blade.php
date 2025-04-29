@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="min-h-screen flex flex-col justify-center items-center bg-blue-700">
+    <div class="min-h-screen flex flex-col justify-center items-center bg-gray-100">
         <div class="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
             <h1 class="text-3xl text-center font-extrabold text-gray-800 mb-6">Login</h1>
 
@@ -38,7 +38,7 @@
                         <p class="text-red-600">{{ $message }}</p>
                     @enderror
                     <button type="submit"
-                        class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-300">
+                        class="w-full bg-slate-800 text-white py-3 px-4 rounded-md hover:bg-slate-700['user', 'admin', 'operator'] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-300">
                         Login
                     </button>
                 </div>
