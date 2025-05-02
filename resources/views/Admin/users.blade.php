@@ -1,240 +1,126 @@
-<x-layout>
-    <div class="flex">
-        <x-sidebar />
-        <main class=" w-full bg-gray-50 isjs:bg-gray-900 p-3 sm:p-5 flex flex-col justify-center items-center">
-            <div class="w-full px-4 ">
-                <!-- Start coding here -->
-                <div class="bg-white isjs:bg-gray-800  shadow-md sm:rounded-lg overflow-hidden">
-                    <div
-                        class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
-                        <div class="w-full md:w-1/2">
-                            <form class="flex items-center">
-                                <label for="simple-search" class="sr-only">Search</label>
-                                <div class="relative w-full">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 isjs:text-gray-400"
-                                            fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                    <input type="text" id="simple-search"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 isjs:bg-gray-700 isjs:border-gray-600 isjs:placeholder-gray-400 isjs:text-white isjs:focus:ring-primary-500 isjs:focus:border-primary-500"
-                                        placeholder="Search" required="">
-                                </div>
-                            </form>
-                        </div>
-                        <div
-                            class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-                            <button type="button"
-                                class="flex items-center justify-center text-white bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 isjs:bg-primary-600 isjs:hover:bg-primary-700 focus:outline-none isjs:focus:ring-primary-800">
-                                <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path clip-rule="evenodd" fill-rule="evenodd"
-                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
-                                </svg>
-                                Add product
-                            </button>
-                            <div class="flex items-center space-x-3 w-full md:w-auto">
-                                <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"
-                                    class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 isjs:focus:ring-gray-700 isjs:bg-gray-800 isjs:text-gray-400 isjs:border-gray-600 isjs:hover:text-white isjs:hover:bg-gray-700"
-                                    type="button">
-                                    <svg class="-ml-1 mr-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path clip-rule="evenodd" fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                    Actions
-                                </button>
-                                <div id="actionsDropdown"
-                                    class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow isjs:bg-gray-700 isjs:divide-gray-600">
-                                    <ul class="py-1 text-sm text-gray-700 isjs:text-gray-200"
-                                        aria-labelledby="actionsDropdownButton">
-                                        <li>
-                                            <a href="#"
-                                                class="block py-2 px-4 hover:bg-gray-100 isjs:hover:bg-gray-600 isjs:hover:text-white">Mass
-                                                Edit</a>
-                                        </li>
-                                    </ul>
-                                    <div class="py-1">
-                                        <a href="#"
-                                            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 isjs:hover:bg-gray-600 isjs:text-gray-200 isjs:hover:text-white">Delete
-                                            all</a>
-                                    </div>
-                                </div>
-                                <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
-                                    class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 isjs:focus:ring-gray-700 isjs:bg-gray-800 isjs:text-gray-400 isjs:border-gray-600 isjs:hover:text-white isjs:hover:bg-gray-700"
-                                    type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                                        class="h-4 w-4 mr-2 text-gray-400" viewbox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    Filter
-                                    <svg class="-mr-1 ml-1.5 w-5 h-5" fill="currentColor" viewbox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path clip-rule="evenodd" fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                                    </svg>
-                                </button>
-                                <div id="filterDropdown"
-                                    class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow isjs:bg-gray-700">
-                                    <h6 class="mb-3 text-sm font-medium text-gray-900 isjs:text-white">Choose brand</h6>
-                                    <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
-                                        <li class="flex items-center">
-                                            <input id="apple" type="checkbox" value=""
-                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 isjs:focus:ring-primary-600 isjs:ring-offset-gray-700 focus:ring-2 isjs:bg-gray-600 isjs:border-gray-500">
-                                            <label for="apple"
-                                                class="ml-2 text-sm font-medium text-gray-900 isjs:text-gray-100">Apple
-                                                (56)</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="fitbit" type="checkbox" value=""
-                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 isjs:focus:ring-primary-600 isjs:ring-offset-gray-700 focus:ring-2 isjs:bg-gray-600 isjs:border-gray-500">
-                                            <label for="fitbit"
-                                                class="ml-2 text-sm font-medium text-gray-900 isjs:text-gray-100">Microsoft
-                                                (16)</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="razor" type="checkbox" value=""
-                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 isjs:focus:ring-primary-600 isjs:ring-offset-gray-700 focus:ring-2 isjs:bg-gray-600 isjs:border-gray-500">
-                                            <label for="razor"
-                                                class="ml-2 text-sm font-medium text-gray-900 isjs:text-gray-100">Razor
-                                                (49)</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="nikon" type="checkbox" value=""
-                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 isjs:focus:ring-primary-600 isjs:ring-offset-gray-700 focus:ring-2 isjs:bg-gray-600 isjs:border-gray-500">
-                                            <label for="nikon"
-                                                class="ml-2 text-sm font-medium text-gray-900 isjs:text-gray-100">Nikon
-                                                (12)</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="benq" type="checkbox" value=""
-                                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 isjs:focus:ring-primary-600 isjs:ring-offset-gray-700 focus:ring-2 isjs:bg-gray-600 isjs:border-gray-500">
-                                            <label for="benq"
-                                                class="ml-2 text-sm font-medium text-gray-900 isjs:text-gray-100">BenQ
-                                                (74)</label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+<x-layoutAdmin>
+    <div class="min-h-screen w-full bg-base-100 p-5">
+
+        <div class="flex flex-col gap-5 mb-6">
+
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div>
+                    <h1 class="text-2xl font-bold text-base-content">User Management</h1>
+                    <p class="text-sm text-base-content/70">Manage all users including operator and peminjam.</p>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="card bg-primary text-primary-content shadow-md">
+                    <div class="card-body">
+                        <h2 class="card-title">Total Operators</h2>
+                        <p class="text-3xl font-bold">{{ $operatorCount }}</p>
                     </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-sm text-left text-gray-500 isjs:text-gray-400">
-                            <thead
-                                class="text-xs text-gray-700 uppercase bg-gray-50 isjs:bg-gray-700 isjs:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-4 py-3">Name</th>
-                                    <th scope="col" class="px-4 py-3">Email</th>
-                                    <th scope="col" class="px-4 py-3">Role</th>
-                                    <th scope="col" class="px-4 py-3">
-                                        <span class="sr-only">Actions</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="border-b isjs:border-gray-700">
-                                    <th scope="row"
-                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap isjs:text-white">
-                                        Apple iMac 27&#34;</th>
-                                    <td class="px-4 py-3">PC</td>
-                                    <td class="px-4 py-3">Apple</td>
-                                    <td class="px-4 py-3 flex items-center justify-end">
-                                        <button id="apple-imac-27-dropdown-button"
-                                            data-dropdown-toggle="apple-imac-27-dropdown"
-                                            class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none isjs:text-gray-400 isjs:hover:text-gray-100"
-                                            type="button">
-                                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                                viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                                            </svg>
-                                        </button>
-                                        <div id="apple-imac-27-dropdown"
-                                            class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow isjs:bg-gray-700 isjs:divide-gray-600">
-                                            <ul class="py-1 text-sm text-gray-700 isjs:text-gray-200"
-                                                aria-labelledby="apple-imac-27-dropdown-button">
-                                                <li>
-                                                    <a href="#"
-                                                        class="block py-2 px-4 hover:bg-gray-100 isjs:hover:bg-gray-600 isjs:hover:text-white">Show</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"
-                                                        class="block py-2 px-4 hover:bg-gray-100 isjs:hover:bg-gray-600 isjs:hover:text-white">Edit</a>
-                                                </li>
-                                            </ul>
-                                            <div class="py-1">
-                                                <a href="#"
-                                                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 isjs:hover:bg-gray-600 isjs:text-gray-200 isjs:hover:text-white">Delete</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
+                </div>
+                <div class="card bg-secondary text-secondary-content shadow-md">
+                    <div class="card-body">
+                        <h2 class="card-title">Total Peminjam</h2>
+                        <p class="text-3xl font-bold">{{ $peminjamCount }}</p>
                     </div>
-                    <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
-                        aria-label="Table navigation">
-                        <span class="text-sm font-normal text-gray-500 isjs:text-gray-400">
-                            Showing
-                            <span class="font-semibold text-gray-900 isjs:text-white">1-10</span>
-                            of
-                            <span class="font-semibold text-gray-900 isjs:text-white">1000</span>
-                        </span>
-                        <ul class="inline-flex items-stretch -space-x-px">
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 isjs:bg-gray-800 isjs:border-gray-700 isjs:text-gray-400 isjs:hover:bg-gray-700 isjs:hover:text-white">
-                                    <span class="sr-only">Previous</span>
-                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 isjs:bg-gray-800 isjs:border-gray-700 isjs:text-gray-400 isjs:hover:bg-gray-700 isjs:hover:text-white">1</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 isjs:bg-gray-800 isjs:border-gray-700 isjs:text-gray-400 isjs:hover:bg-gray-700 isjs:hover:text-white">2</a>
-                            </li>
-                            <li>
-                                <a href="#" aria-current="page"
-                                    class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 isjs:border-gray-700 isjs:bg-gray-700 isjs:text-white">3</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 isjs:bg-gray-800 isjs:border-gray-700 isjs:text-gray-400 isjs:hover:bg-gray-700 isjs:hover:text-white">...</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 isjs:bg-gray-800 isjs:border-gray-700 isjs:text-gray-400 isjs:hover:bg-gray-700 isjs:hover:text-white">100</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                    class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 isjs:bg-gray-800 isjs:border-gray-700 isjs:text-gray-400 isjs:hover:bg-gray-700 isjs:hover:text-white">
-                                    <span class="sr-only">Next</span>
-                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
-        </main>
+        </div>
+
+        <div class="flex w-full justify-between gap-2 mb-3">
+            <a href="{{ route('user.create') }}" class="btn btn-sm btn-success">+ Add User</a>
+
+            <form method="GET" action="{{ route('user.index') }}" class=" flex items-center gap-2">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search user..."
+                    class="input input-bordered input-sm w-52" />
+                <button type="submit" class="btn btn-sm btn-primary">Search</button>
+            </form>
+        </div>
+
+        <div class="overflow-x-auto rounded-box border border-base-content/10 bg-base-200">
+            <table class="table table-zebra">
+                <thead>
+                    <tr class="text-base-content">
+                        <th></th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($users as $user)
+                        <tr>
+                            <th>{{ $loop->iteration + ($users->currentPage() - 1) * $users->perPage() }}</th>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                <span
+                                    class="badge badge-outline badge-sm
+                                {{ $user->role === 'operator' ? 'badge-primary' : 'badge-secondary' }}">
+                                    {{ ucfirst($user->role) }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="dropdown dropdown-end">
+                                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle btn-sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path
+                                                d="M6 10a2 2 0 114 0 2 2 0 01-4 0zm4-6a2 2 0 11-4 0 2 2 0 014 0zm0 12a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                    </div>
+                                    <ul tabindex="0"
+                                        class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40">
+                                        <li>
+                                            <a href="{{ route('user.show', $user->id) }}">Detail</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('user.edit', $user->id) }}">Edit</a>
+                                        </li>
+                                        <li>
+                                            <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                                                onsubmit="return confirm('Are you sure you want to delete this user?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-500">Delete</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-base-content/60">No users found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-4">
+            {{ $users->links('pagination::tailwind') }}
+        </div>
+
+        <!-- Modal Trigger -->
+        {{-- <div class="mt-6">
+            <button class="btn btn-info btn-sm" onclick="userStats.showModal()">Show User Stats</button>
+        </div>
+
+        <!-- Modal -->
+        <dialog id="userStats" class="modal">
+            <div class="modal-box">
+                <h3 class="font-bold text-lg">User Statistics</h3>
+                <p class="py-2">Total Operators: <span class="font-semibold">{{ $operatorCount }}</span></p>
+                <p class="py-2">Total Peminjam: <span class="font-semibold">{{ $peminjamCount }}</span></p>
+                <div class="modal-action">
+                    <form method="dialog">
+                        <button class="btn btn-sm">Close</button>
+                    </form>
+                </div>
+            </div>
+        </dialog> --}}
     </div>
-</x-layout>
+</x-layoutAdmin>

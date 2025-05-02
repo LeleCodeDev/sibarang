@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,10 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/dashboard', function () {
         return view('Admin.dashboard');
     })->name('Admin.Dashboard');
-    
-    Route::get('admin/users', function () {
-        return view('Admin.users');
-    })->name('Admin.Users');
+
+    Route::resource('/user', UserController::class);
 
     Route::get('admin/items', function () {
         return view('Admin.items');

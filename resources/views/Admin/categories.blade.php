@@ -1,6 +1,3 @@
-<x-layout>
-    <div class="flex">
-        <x-sidebar />
+<x-layoutAdmin>
 
-    </div>
-</x-layout>
+</x-layoutAdmin>
