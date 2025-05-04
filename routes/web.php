@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,11 +25,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/user', UserController::class);
 
-    Route::get('admin/items', function () {
-        return view('Admin.items');
-    })->name('Admin.Items');
+    Route::resource('/item', ItemController::class);
 
-    Route::get('admin/categories', function () {
-        return view('Admin.categories');
-    })->name('Admin.Categories');
+    Route::resource('/category', CategoryController::class);
+
 });

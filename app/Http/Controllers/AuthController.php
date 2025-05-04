@@ -22,7 +22,7 @@ class AuthController extends Controller
             return redirect()->route('Admin.Dashboard');
         } else {
             return back()->withErrors([
-                'errors' => 'The provided credentials does not match our records'
+                'failed' => 'The provided credentials does not match our records'
             ])->withInput();
         }
     }

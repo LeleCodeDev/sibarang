@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -38,7 +39,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255|string',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+            'role' => 'in:operator,peminjam'
+        ]);
+
+        User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role' => $validated['role']
+        ]);
+
+        return redirect()->route('user.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
