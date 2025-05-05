@@ -16,7 +16,7 @@ class ItemController extends Controller
         })->paginate(10);
 
 
-        return view('Admin.items', compact('items'));
+        return view('Admin.Item.index', compact('items'));
     }
 
     /**

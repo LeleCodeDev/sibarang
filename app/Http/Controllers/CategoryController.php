@@ -16,7 +16,7 @@ class CategoryController extends Controller
         })->paginate(10);
 
 
-        return view('Admin.categories', compact('categories'));
+        return view('Admin.Category.index', compact('categories'));
     }
 
     /**
