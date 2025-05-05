@@ -54,7 +54,7 @@
         </div>
 
         <div class="flex flex-col sm:flex-row w-full justify-between gap-4 mb-4">
-            <button onclick="my_modal_3.showModal()" class="btn btn-sm btn-success gap-2">
+            <button onclick="add_modal.showModal()" class="btn btn-sm btn-success gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -131,7 +131,8 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('user.edit', $user->id) }}"
+                                                    <button onclick="edit_modal_{{ $user->id }}.showModal()"
+                                                        {{-- href="{{ route('user.edit', $user->id) }}" --}}
                                                         class="flex items-center gap-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" viewBox="0 0 24 24" fill="none"
@@ -145,7 +146,7 @@
                                                             </path>
                                                         </svg>
                                                         Edit
-                                                    </a>
+                                                    </button>
                                                 </li>
                                                 <li>
                                                     <form action="{{ route('user.destroy', $user->id) }}"
@@ -176,6 +177,11 @@
                                         </div>
                                     </td>
                                 </tr>
+                                </td>
+                                </tr>
+
+                                {{-- Edit Modal --}}
+                                
                             @empty
                                 <tr>
                                     <td colspan="5" class="text-center py-8 text-base-content/60">
@@ -190,8 +196,6 @@
                                             </line>
                                         </svg>
                                         No users found.
-                                    </td>
-                                </tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -205,12 +209,12 @@
         </div>
     </div>
 
-
-    <dialog id="my_modal_3" class="modal">
+    {{-- Add Modal --}}
+    <dialog id="add_modal" class="modal">
         <form method="POST" action="{{ route('user.store') }}" class="modal-box">
             @csrf
             <h3 class="font-bold text-lg mb-4">Add User</h3>
-    
+
             <div class="form-control mb-3">
                 <label for="name" class="form-control">
                     Username
@@ -224,7 +228,7 @@
                     </label>
                 @enderror
             </div>
-    
+
             <div class="form-control mb-3">
                 <label for="email" class="form-control">
                     Email
@@ -238,7 +242,7 @@
                     </label>
                 @enderror
             </div>
-    
+
             <div class="form-control mb-3">
                 <label for="password" class="form-control">
                     Password
@@ -252,28 +256,29 @@
                     </label>
                 @enderror
             </div>
-    
+
             <div class="form-control mb-3">
                 <label for="role" class="form-control">
                     Role
                 </label> <br>
-                <select name="role" value="{{ old('role') }}" class="select w-full input input-bordered @error('password') input-error @enderror">
+                <select name="role" value="{{ old('role') }}"
+                    class="select w-full input input-bordered @error('password') input-error @enderror">
                     <option disabled selected>Pick a role</option>
                     <option value="opereator">Operator</option>
                     <option value=peminjam>Peminjam</option>
-                  </select>
+                </select>
                 @error('role')
                     <label class="label">
                         <span class="label-text-alt text-error">{{ $message }}</span>
                     </label>
                 @enderror
             </div>
-    
+
             <div class="modal-action">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn" onclick="my_modal_3.close()">Cancel</button>
+                <button type="button" class="btn" onclick="add_modal.close()">Cancel</button>
             </div>
         </form>
     </dialog>
-    
+
 </x-layoutAdmin>

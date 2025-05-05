@@ -17,13 +17,14 @@ class UserController extends Controller
 
         $users = User::when($search, function ($query, $search) {
             $query->where('name', 'like', "%$search%")
-                ->orWhere('email', 'like', "%$search%");
+                ->orWhere('email', 'like', "%$search%")
+                ->orWhere('role', 'like', "%$search%");
         })->paginate(10);
 
         $operatorCount = User::where('role', 'operator')->count();
         $peminjamCount = User::where('role', 'peminjam')->count();
 
-        return view('Admin.users', compact('users', 'operatorCount', 'peminjamCount'));
+        return view('Admin.User.index', compact('users', 'operatorCount', 'peminjamCount'));
     }
 
     /**
@@ -31,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.User.add');
     }
 
     /**
