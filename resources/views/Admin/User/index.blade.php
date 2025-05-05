@@ -5,9 +5,6 @@
                 <h1 class="text-2xl font-bold text-base-content">User Management</h1>
                 <p class="text-sm text-base-content/70">Manage all users including operator and peminjam.</p>
             </div>
-
-            <!-- Theme Toggle Button -->
-
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
@@ -181,7 +178,8 @@
                                 </tr>
 
                                 {{-- Edit Modal --}}
-                                
+                                @include('Admin.User.edit')
+
                             @empty
                                 <tr>
                                     <td colspan="5" class="text-center py-8 text-base-content/60">
@@ -210,75 +208,6 @@
     </div>
 
     {{-- Add Modal --}}
-    <dialog id="add_modal" class="modal">
-        <form method="POST" action="{{ route('user.store') }}" class="modal-box">
-            @csrf
-            <h3 class="font-bold text-lg mb-4">Add User</h3>
-
-            <div class="form-control mb-3">
-                <label for="name" class="form-control">
-                    Username
-                </label>
-                <input type="text" id="name" name="name" value="{{ old('name') }}"
-                    class="input input-bordered w-full @error('name') input-error @enderror"
-                    placeholder="Enter your name">
-                @error('name')
-                    <label class="label">
-                        <span class="label-text-alt text-error">{{ $message }}</span>
-                    </label>
-                @enderror
-            </div>
-
-            <div class="form-control mb-3">
-                <label for="email" class="form-control">
-                    Email
-                </label>
-                <input type="text" id="email" name="email" value="{{ old('email') }}"
-                    class="input input-bordered w-full @error('email') input-error @enderror"
-                    placeholder="Enter your email">
-                @error('email')
-                    <label class="label">
-                        <span class="label-text-alt text-error">{{ $message }}</span>
-                    </label>
-                @enderror
-            </div>
-
-            <div class="form-control mb-3">
-                <label for="password" class="form-control">
-                    Password
-                </label>
-                <input type="password" id="password" name="password"
-                    class="input input-bordered w-full @error('password') input-error @enderror"
-                    placeholder="Enter your password">
-                @error('password')
-                    <label class="label">
-                        <span class="label-text-alt text-error">{{ $message }}</span>
-                    </label>
-                @enderror
-            </div>
-
-            <div class="form-control mb-3">
-                <label for="role" class="form-control">
-                    Role
-                </label> <br>
-                <select name="role" value="{{ old('role') }}"
-                    class="select w-full input input-bordered @error('password') input-error @enderror">
-                    <option disabled selected>Pick a role</option>
-                    <option value="opereator">Operator</option>
-                    <option value=peminjam>Peminjam</option>
-                </select>
-                @error('role')
-                    <label class="label">
-                        <span class="label-text-alt text-error">{{ $message }}</span>
-                    </label>
-                @enderror
-            </div>
-
-            <div class="modal-action">
-                <button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn" onclick="add_modal.close()">Cancel</button>
-            </div>
-        </form>
-    </dialog>
+    @include('Admin.User.create')
 
 </x-layoutAdmin>

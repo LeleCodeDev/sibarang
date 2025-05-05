@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,9 @@ class ItemController extends Controller
             $query->where('name', 'like', "%$search%");
         })->paginate(10);
 
+        $categories = Category::all();
 
-        return view('Admin.Item.index', compact('items'));
+        return view('Admin.Item.index', compact('items', 'categories'));
     }
 
     /**

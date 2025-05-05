@@ -48,7 +48,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**

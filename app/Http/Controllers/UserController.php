@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('Admin.User.add');
+        return view('Admin.User.create');
     }
 
     /**
@@ -68,9 +68,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view("Admin.User.edit", compact('user'));
     }
 
     /**
@@ -78,7 +79,21 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|max:255|string',
+            'email' => 'required|email',
+            'role' => 'in:operator,peminjam'
+        ]);
+
+        $user->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'role' => $validated['role']
+        ]);
+
+        return redirect()->route('user.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
