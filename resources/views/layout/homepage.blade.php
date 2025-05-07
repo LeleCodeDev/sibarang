@@ -10,7 +10,7 @@
             <h2 class="text-xs text-purple-500 tracking-widest font-medium title-font mb-1">HALAMAN SI BARANG</h2>
             <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Barangmu, Barangku, Barang Kita!</h1>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Buat semua keperluanmu lebih praktis dengan Si Barang, aplikasi terpecaya untuk pinjam-meminjam barang antar pengguna.</p>
-            <button class="flex mx-auto mt-16 text-white bg-purple-500 border-0 py-2 px-8 focus:outline-none hover:bg-purple-600 rounded text-lg">Coba Sekarang</button>
+            <a href="{{ route('login')}}"><button class="flex mx-auto mt-16 text-white bg-purple-500 border-0 py-2 px-8 focus:outline-none hover:bg-purple-600 rounded text-lg">Coba Sekarang</button></a>
         </div>
         @php
       $features = [
@@ -53,7 +53,7 @@
 <section class="bg-white text-gray-700 body-font">
     <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
         <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
-            <img class="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">
+            <img class="object-cover object-center rounded" alt="hero" src="{{ asset('image/logosibar.jpg') }}">
         </div>
         <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
             <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Kelola Barang

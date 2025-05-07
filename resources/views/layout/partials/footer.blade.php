@@ -1,8 +1,10 @@
 <footer class="bg-white text-gray-600 body-font">
     <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
       <a class="flex title-font font-medium items-center md:justify-start justify-center text-whi-900">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-purple-500 rounded-full" viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+          class="w-10 h-10 text-black p-2">
+          <path
+            d="M20.25 7.768v8.464a.75.75 0 01-.435.684l-7.5 3.273a.75.75 0 01-.63 0l-7.5-3.273a.75.75 0 01-.435-.684V7.768m16.5 0a.75.75 0 00-.435-.684l-7.5-3.273a.75.75 0 00-.63 0l-7.5 3.273a.75.75 0 00-.435.684m16.5 0L12 11.25m0 9.75V11.25" />
         </svg>
         <span class="ml-3 text-xl">Sibarang</span>
       </a>
