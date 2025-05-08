@@ -34,6 +34,20 @@
             </div>
 
             <div class="form-control mb-3">
+                <label for="password" class="form-control">
+                    Password
+                </label>
+                <input type="password" id="password" name="password"
+                    class="input input-bordered w-full @error('password') input-error @enderror"
+                    placeholder="Enter your password">
+                @error('password')
+                    <label class="label">
+                        <span class="label-text-alt text-error">{{ $message }}</span>
+                    </label>
+                @enderror
+            </div>
+
+            <div class="form-control mb-3">
                 <label for="role" class="form-control">
                     Role
                 </label> <br>

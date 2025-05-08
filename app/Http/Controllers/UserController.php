@@ -19,7 +19,7 @@ class UserController extends Controller
             $query->where('name', 'like', "%$search%")
                 ->orWhere('email', 'like', "%$search%")
                 ->orWhere('role', 'like', "%$search%");
-        })->paginate(10);
+        })->latest()->paginate(10);
 
         $operatorCount = User::where('role', 'operator')->count();
         $peminjamCount = User::where('role', 'peminjam')->count();
@@ -84,6 +84,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:255|string',
             'email' => 'required|email',
+            'password' => 'nullable|min:6',
             'role' => 'in:operator,peminjam'
         ]);
 
@@ -92,6 +93,10 @@ class UserController extends Controller
             'email' => $validated['email'],
             'role' => $validated['role']
         ]);
+
+        if ($request->has('password') && !empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
 
         return redirect()->route('user.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }

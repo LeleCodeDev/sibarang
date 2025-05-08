@@ -49,7 +49,7 @@
                                 ['name' => 'synthwave', 'bg' => 'bg-fuchsia-700'],
                                 ['name' => 'halloween', 'bg' => 'bg-orange-600'],
                                 ['name' => 'aqua', 'bg' => 'bg-cyan-300'],
-                                
+
 
                                 // 🌕 Light Themes
                                 ['name' => 'lofi', 'bg' => 'bg-gray-300'],

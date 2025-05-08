@@ -34,6 +34,7 @@
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Quantity</th>
+                                <th>Category</th>
                                 <th>Image</th>
                                 <th>Status</th>
                                 <th class="text-right"></th>
@@ -46,7 +47,8 @@
                                     <td>{{ $item->name }}</td>
                                     <td class="truncate max-w-[200px] overflow-hidden whitespace-nowrap">{{ $item->description }}</td>
                                     <td class="text-center">{{ $item->quantity }}</td>
-                                    <td><img src="{{ $item->image }}" alt=""></td>
+                                    <td>{{ $item->category->name }}</td>
+                                    <td><img src="{{ asset('storage/' . $item->image) }}" class="rounded max-w-[150px]" alt=""></td>
                                     <td>{{ $item->status }}</td>
                                     <td class="text-right">
                                         <div class="dropdown dropdown-end">
@@ -63,10 +65,10 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('item.edit', $item->id) }}" class="flex items-center gap-2">
+                                                    <button onclick="edit_modal_{{ $item->id }}.showModal()" class="flex items-center gap-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                                                         Edit
-                                                    </a>
+                                                    </button>
                                                 </li>
                                                 <li>
                                                     <form action="{{ route('item.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?')">
@@ -82,6 +84,8 @@
                                         </div>
                                     </td>
                                 </tr>
+
+                                @include('Admin.Item.edit')
                             @empty
                                 <tr>
                                     <td colspan="7" class="text-center py-8 text-base-content/60">
