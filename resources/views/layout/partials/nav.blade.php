@@ -8,11 +8,5 @@
         </svg>
         <span class="ml-3 text-xl">Sibarang</span>
       </a>
-      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-        <a class="mr-5 hover:text-gray-900">Beranda</a>
-        <a class="mr-5 hover:text-gray-900">Cara Kerja</a>
-        <a class="mr-5 hover:text-gray-900">Kategori Barang</a>
-        <a class="mr-5 hover:text-gray-900">Hubungi Kami</a>
-      </nav>
     </div>
   </header>

@@ -16,7 +16,7 @@
       $features = [
         [
             'title' => 'Barang Terpopuler',
-            'desc' => 'Temukan barang-barang yang paling sering dipinjam oleh pengguna lain. Mulai dari alat rumah tangga, elektronik, hingga perlengkapan event.',
+            'desc' => 'Temukan barang-barang yang paling sering dipinjam oleh pengguna lain. Mulai dari elektronik, hingga perlengkapan event.',
         ],
         [
             'title' => 'Pinjam Mudah & Cepat',
@@ -33,18 +33,13 @@
     ];
        @endphp
 
-
-   <div class="flex flex-wrap">
-        @foreach($features as $feature)
-        <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">
-                <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">{{ $feature['title'] }}</h2>
-                    <p class="leading-relaxed text-base mb-4">{{ $feature['desc'] }}</p>
-            <a class="text-purple-500 inline-flex items-center" href="#">Learn More
-                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7"></path>
-                </svg>
-            </a>
+<div class="grid grid-cols-4 gap-6">
+    @foreach($features as $feature)
+    <div class="card bg-white shadow-sm w-full">
+        <div class="card-body">
+            <h2 class="card-title">{{ $feature['title'] }}</h2>
+            <p>{{ $feature['desc'] }}</p>
+        </div>
     </div>
     @endforeach
 </div>
@@ -59,7 +54,42 @@
             <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Kelola Barang
                 <br class="hidden lg:inline-block">Jadi Mudah
             </h1>
-            <p class="mb-8 leading-relaxed">Si Barang membantu kamu mencatat, melacak, dan mengelola stok barang dengan cepat dan praktis.</p>
+            <p class="mb-8 leading-relaxed">Si Barang membantu kamu mencatat, melacak, dan mengelola stok barang dengan cepat dan praktis. Dengan antarmuka yang sederhana dan fitur lengkap, kamu bisa melihat status barang secara real-time, mengatur ketersediaan, serta meminjamkan barang ke orang lain tanpa ribet. Cocok untuk keperluan pribadi, komunitas, hingga usaha kecil yang butuh sistem inventaris ringan tapi efektif.</p>
+        </div>
+    </div>
+</section>
+<section class="bg-white text-gray-700 body-font">
+    <div class="container mx-auto px-5 py-24 flex justify-end">
+      <div class="flex flex-col md:flex-row items-center">
+        <div class="lg:flex-grow md:w-1/2 flex flex-col items-end text-right">
+          <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+            Kelola Barang
+            <br class="hidden lg:inline-block">Jadi Mudah
+          </h1>
+          <p class="mb-8 leading-relaxed">
+            Si Barang membantu kamu mencatat, melacak, dan mengelola stok barang dengan cepat dan praktis.
+            Dengan antarmuka yang sederhana dan fitur lengkap, kamu bisa melihat status barang secara real-time,
+            mengatur ketersediaan, serta meminjamkan barang ke orang lain tanpa ribet.
+            Cocok untuk keperluan pribadi, komunitas, hingga usaha kecil yang butuh sistem inventaris ringan tapi efektif.
+          </p>
+        </div>
+        <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 ml-10">
+          <img class="object-cover object-center rounded" alt="hero" src="{{ asset('image/logosibar.jpg') }}">
+        </div>
+
+      </div>
+    </div>
+  </section>
+<section class="bg-white text-gray-700 body-font">
+    <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+        <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
+            <img class="object-cover object-center rounded" alt="hero" src="{{ asset('image/logosibar.jpg') }}">
+        </div>
+        <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+            <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Kelola Barang
+                <br class="hidden lg:inline-block">Jadi Mudah
+            </h1>
+            <p class="mb-8 leading-relaxed">Si Barang membantu kamu mencatat, melacak, dan mengelola stok barang dengan cepat dan praktis. Dengan antarmuka yang sederhana dan fitur lengkap, kamu bisa melihat status barang secara real-time, mengatur ketersediaan, serta meminjamkan barang ke orang lain tanpa ribet. Cocok untuk keperluan pribadi, komunitas, hingga usaha kecil yang butuh sistem inventaris ringan tapi efektif.</p>
         </div>
     </div>
 </section>
