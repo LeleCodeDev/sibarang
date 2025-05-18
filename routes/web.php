@@ -28,4 +28,6 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/category', CategoryController::class);
 
+    Route::post('/logout', [AuthController::class, 'logout']);
+
 });

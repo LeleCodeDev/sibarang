@@ -50,7 +50,6 @@
                                 ['name' => 'halloween', 'bg' => 'bg-orange-600'],
                                 ['name' => 'aqua', 'bg' => 'bg-cyan-300'],
 
-
                                 // 🌕 Light Themes
                                 ['name' => 'lofi', 'bg' => 'bg-gray-300'],
                                 ['name' => 'nord', 'bg' => 'bg-cyan-900'],
@@ -85,15 +84,7 @@
                     <div class="dropdown dropdown-end">
                         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                             <div class="">
-                                <svg class="w-7 h-7 text-white hidden" id="theme-icon-dark-user" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd"
-                                        d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-
-                                <svg class="w-7 h-7 text-black hidden" id="theme-icon-light-user" aria-hidden="true"
+                                <svg class="w-7 h-7" id="theme-icon-dark-user" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                     viewBox="0 0 24 24">
                                     <path fill-rule="evenodd"
@@ -104,7 +95,12 @@
                         </div>
                         <ul tabindex="0"
                             class="menu dropdown-content z-[1] p-2 shadow-lg bg-base-200 rounded-box w-52 mt-4">
-                            <li><a>Logout</a></li>
+                            <li>
+                                <form action="{{ url('/logout') }}" method="post">
+                                    @csrf
+                                    <button type="submit">Logout</button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -202,8 +198,6 @@
             const themeBtn = document.getElementById('theme-btn');
             const themeIconDark = document.getElementById('theme-icon-dark');
             const themeIconLight = document.getElementById('theme-icon-light');
-            const themeIconDarkUser = document.getElementById('theme-icon-dark-user');
-            const themeIconLightUser = document.getElementById('theme-icon-light-user');
             const ulThemes = document.getElementById('ul-themes');
             const themeItems = document.querySelectorAll('.theme-item');
             const menuIcons = document.querySelectorAll('#menu-icon');
@@ -246,13 +240,11 @@
                 if (darkThemes.includes(theme)) {
                     themeIconDark.classList.remove('hidden');
                     themeIconLight.classList.add('hidden');
-                    themeIconDarkUser.classList.remove('hidden');
-                    themeIconLightUser.classList.add('hidden');
+
                 } else {
                     themeIconDark.classList.add('hidden');
                     themeIconLight.classList.remove('hidden');
-                    themeIconDarkUser.classList.add('hidden');
-                    themeIconLightUser.classList.remove('hidden');
+
 
                 }
             }
