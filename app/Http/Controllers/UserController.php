@@ -15,11 +15,12 @@ class UserController extends Controller
     {
         $search = $request->input('search');
 
-        $users = User::when($search, function ($query, $search) {
-            $query->where('name', 'like', "%$search%")
-                ->orWhere('email', 'like', "%$search%")
-                ->orWhere('role', 'like', "%$search%");
-        })->latest()->paginate(10);
+        $users = User::where('role', '!=', 'admin')
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%")
+                    ->orWhere('role', 'like', "%$search%");
+            })->latest()->paginate(10);
 
         $operatorCount = User::where('role', 'operator')->count();
         $peminjamCount = User::where('role', 'peminjam')->count();
@@ -96,6 +97,7 @@ class UserController extends Controller
 
         if ($request->has('password') && !empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
+            $user->save();
         }
 
         return redirect()->route('user.index')->with(['success' => 'Data Berhasil Disimpan!']);
@@ -104,8 +106,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('user.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

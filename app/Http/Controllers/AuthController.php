@@ -19,7 +19,18 @@ class AuthController extends Controller
         }
 
         if (Auth::attempt($validated)) {
-            return redirect()->route('Admin.Dashboard');
+            $userRole = Auth::user()->role;
+
+            if ($userRole == 'admin') {
+                return redirect()->route('Admin.Dashboard');
+            } elseif ($userRole == 'operator') {
+                return redirect()->route('Operator.Dashboard');
+            } elseif ($userRole == 'peminjam') {
+                return redirect()->route('home');
+            } else {
+                return redirect()->route('landing');
+            }
+
         } else {
             return back()->withErrors([
                 'failed' => 'The provided credentials does not match our records'
@@ -35,6 +46,6 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()->route('landing');
     }
 }

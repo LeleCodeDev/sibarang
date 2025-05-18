@@ -7,19 +7,20 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 
-Route::get('/', [HomeController::class, 'index'])->name('homepage');
+Route::get('/', [HomeController::class, 'index'])->name('landing');
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', function () {
-        return view('Auth.login');
-    })->name('login');
+  Route::get('/login', function () {
+    return view('Auth.login');
+  })->name('login');
 
-    Route::post('/login', [AuthController::class, 'login']);
+  Route::post('/login', [AuthController::class, 'login']);
 });
 
 Route::middleware('auth')->group(function () {
+  Route::middleware('role:admin')->group(function () {
     Route::get('admin/dashboard', function () {
-        return view('Admin.dashboard');
+      return view('Admin.dashboard');
     })->name('Admin.Dashboard');
 
     Route::resource('/user', UserController::class);
@@ -27,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/item', ItemController::class);
 
     Route::resource('/category', CategoryController::class);
+  });
 
-    Route::post('/logout', [AuthController::class, 'logout']);
-
+  Route::post('/logout', [AuthController::class, 'logout']);
 });

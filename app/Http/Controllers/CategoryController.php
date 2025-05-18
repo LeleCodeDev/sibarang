@@ -13,7 +13,7 @@ class CategoryController extends Controller
 
         $categories = Category::when($search, function ($query, $search) {
             $query->where('name', 'like', "%$search%");
-        })->paginate(10);
+        })->latest()->latest()->paginate(10);
 
 
         return view('Admin.Category.index', compact('categories'));
@@ -24,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -32,7 +32,17 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:categories,name|string',
+            'description' => 'required|string'
+        ]);
+
+        Category::create([
+            'name' => $validated['name'],
+            'description' => $validated['description']
+        ]);
+
+        return redirect()->route('category.index');
     }
 
     /**
@@ -48,22 +58,39 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|unique:categories,name|string',
+            'description' => 'required|string'
+        ]);
+
+        $category->update([
+            'name' => $validated['name'],
+            'descripiton' => $validated['description']
+        ]);
+
+        return redirect()->route('category.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->items()->delete();
+        $category->delete();
+
+        return redirect()->route('category.index');
     }
 }
