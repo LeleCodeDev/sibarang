@@ -13,7 +13,7 @@
                     <div class="flex justify-between items-center">
                         <div>
                             <h4 class="card-title">Total Peminjaman</h4>
-                            <p class="text-3xl font-bold mt-2">124</p>
+                            <p class="text-3xl font-bold mt-2">19</p>
                         </div>
                         <div class="avatar placeholder">
                             <div class="bg-primary-focus text-primary-content rounded-full w-12">
@@ -35,7 +35,7 @@
                     <div class="flex justify-between items-center">
                         <div>
                             <h4 class="card-title">Barang Belum Kembali</h4>
-                            <p class="text-3xl font-bold mt-2">27</p>
+                            <p class="text-3xl font-bold mt-2">18</p>
                         </div>
                         <div class="avatar placeholder">
                             <div class="bg-secondary-focus text-secondary-content rounded-full w-12">
@@ -57,7 +57,7 @@
                     <div class="flex justify-between items-center">
                         <div>
                             <h4 class="card-title">Sudah Dikembalikan</h4>
-                            <p class="text-3xl font-bold mt-2">97</p>
+                            <p class="text-3xl font-bold mt-2">1</p>
                         </div>
                         <div class="avatar placeholder">
                             <div class="bg-accent-focus text-accent-content rounded-full w-12">
@@ -217,10 +217,10 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>Mengembalikan</td>
+                                <td>Meminjam</td>
                                 <td>Speaker</td>
                                 <td>2 jam lalu</td>
-                                <td><div class="badge badge-accent">Dikembalikan</div></td>
+                                <td><div class="badge badge-primary">Dipinjam</div></td>
                             </tr>
                         </tbody>
                     </table>
