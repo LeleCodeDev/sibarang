@@ -1,9 +1,9 @@
 <dialog id="edit_modal_{{ $item->id }}" class="modal">
     <div class="modal-box">
-        <form method="POST" action="{{ route('item.update', $item->id) }}">
+        <form method="POST" enctype="multipart/form-data" action="{{ route('item.update', $item->id) }}">
             @csrf
             @method('PUT')
-            <h3 class="font-bold text-lg mb-4">Edit User</h3>
+            <h3 class="font-bold text-lg mb-4">Edit Item</h3>
 
             {{-- Name --}}
             <div class="form-control mb-3">
@@ -68,7 +68,9 @@
             {{-- Image --}}
             <div class="form-control mb-3">
                 <label for="image" class="form-label">Image</label>
-                <input type="file" name="image" id="image"
+                <img src="{{ asset('storage/' . $item->image) }}" class="rounded w-full my-3" id="image-preview"
+                    alt="">
+                <input type="file" name="image" id="image" onchange="previewImage(event)"
                     class="file-input file-input-bordered w-full @error('image') input-error @enderror">
                 @error('image')
                     <label class="label">
@@ -82,5 +84,21 @@
                 <button type="button" class="btn" onclick="edit_modal_{{ $item->id }}.close()">Cancel</button>
             </div>
         </form>
+        <script>
+            function previewImage(event) {
+                const input = event.target;
+                const preview = document.getElementById('image-preview');
+
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        preview.src = e.target.result;
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
     </div>
 </dialog>

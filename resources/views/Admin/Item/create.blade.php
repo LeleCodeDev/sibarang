@@ -7,8 +7,7 @@
         <div class="form-control mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" name="name" id="name" value="{{ old('name') }}"
-                class="input input-bordered w-full @error('name') input-error @enderror"
-                placeholder="Enter item name">
+                class="input input-bordered w-full @error('name') input-error @enderror" placeholder="Enter item name">
             @error('name')
                 <label class="label">
                     <span class="label-text-alt text-error">{{ $message }}</span>
@@ -66,6 +65,7 @@
         <div class="form-control mb-3">
             <label for="image" class="form-label">Image</label>
             <input type="file" name="image" id="image"
+            onchange="previewImage(event)"
                 class="file-input file-input-bordered w-full @error('image') input-error @enderror">
             @error('image')
                 <label class="label">
@@ -80,4 +80,20 @@
             <button type="button" class="btn" onclick="add_modal.close()">Cancel</button>
         </div>
     </form>
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('image-preview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 </dialog>

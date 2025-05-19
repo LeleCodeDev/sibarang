@@ -53,7 +53,7 @@
                         Theme
                     </label>
                     <ul tabindex="0"
-                        class="dropdown-content z-50 menu p-2 shadow-lg bg-base-200 rounded-box w-52 max-h-80 overflow-y-auto">
+                        class="dropdown-content z-50 menu p-2 shadow-lg bg-base-200 rounded-box w-60 max-h-96 overflow-y-auto">
                         @foreach ($daisyuiThemes as $theme)
                             <li>
                                 <a id="theme-{{ $theme['name'] }}" class="theme-item">

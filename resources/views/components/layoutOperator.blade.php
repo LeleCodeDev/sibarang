@@ -14,12 +14,12 @@
                                 d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
                     </label>
-                    <h2 class="text-2xl font-semibold text-base-content hidden sm:block">Admin Dashboard</h2>
+                    <h2 class="text-2xl font-semibold text-base-content hidden sm:block">Operator Dashboard</h2>
                 </div>
 
                 <div class="flex items-center gap-3">
                     <!-- Theme Toggle -->
-                    <div class="dropdown dropdown-end shadow-md">
+                    <div class="dropdown dropdown-end">
                         <div tabindex="0" role="button" class="btn btn-ghost btn-circle" id="theme-btn">
                             <!-- icon light theme -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

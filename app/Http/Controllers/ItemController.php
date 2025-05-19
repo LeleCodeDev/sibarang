@@ -79,9 +79,39 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $item = Item::findOrFail($id);
+
+        $validated = $request->validate([
+            'category_id' => 'required|exists:categories,id',
+            'name' => 'required|string|max:255',
+            'description' => 'required',
+            'quantity' => 'required|integer|min:0',
+            'image' => 'file|nullable|max:5000|mimes:png,jpg,jpeg',
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($item->image) {
+                Storage::disk('public')->delete($item->image);
+            }
+
+            $newImagePath = Storage::disk('public')->put('product_images', $request->file('image'));
+            $validated['image'] = $newImagePath;
+        } else {
+            $validated['image'] = $item->image;
+        }
+
+        $item->update([
+            'category_id' => $validated['category_id'],
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'quantity' => $validated['quantity'],
+            'image' => $validated['image'],
+            'status' => $validated['quantity'] > 0 ? 'available' : 'unavailable',
+        ]);
+
+        return redirect()->route('item.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
