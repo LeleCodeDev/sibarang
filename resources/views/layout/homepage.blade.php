@@ -36,7 +36,7 @@ $features = [
       <div class="badge badge-primary mb-2">Selamat Datang di</div>
       <h1 class="text-5xl font-bold">Si Barang</h1>
       <p class="py-6">Platform peminjaman barang terpercaya. Temukan, pinjam, dan kelola barang dengan mudah hanya dalam beberapa klik.</p>
-      <a href="{{ route('login') }}">
+      <a href="{{route('login')}}">
         <button class="btn btn-primary">Mulai Sekarang</button>
       </a>
     </div>
@@ -71,7 +71,6 @@ $features = [
       <div class="md:w-1/2 mt-10 md:mt-0">
         <h2 class="text-3xl font-bold mb-4">Statistik Mudah Dipantau</h2>
         <p class="mb-6 text-base-content/80">Pantau semua aktivitas barangmu lewat dashboard yang interaktif dan informatif. Mulai dari jumlah peminjaman, kategori populer, hingga status pengembalian.</p>
-        <button class="btn btn-outline btn-primary">Lihat Detail</button>
       </div>
       <div class="md:w-1/2 md:pl-8">
         <div class="mockup-window border bg-base-300">
@@ -94,7 +93,6 @@ $features = [
       <div class="md:w-1/2 md:pl-10 mt-10 md:mt-0">
         <h2 class="text-3xl font-bold mb-4">Kelola Kategori Barang</h2>
         <p class="text-base-content/80">Buat dan atur kategori barang sesuai kebutuhanmu. Si Barang membantu menyederhanakan pengelompokan barang agar pencarian lebih cepat dan efisien.</p>
-        <button class="btn btn-outline btn-primary mt-4">Pelajari Lebih Lanjut</button>
       </div>
     </div>
   </div>
