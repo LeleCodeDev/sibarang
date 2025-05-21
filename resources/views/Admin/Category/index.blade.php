@@ -18,7 +18,7 @@
                 Add Category
             </button>
 
-            <form method="GET" action="{{ route('item.index') }}" class="w-full md:w-auto flex items-center gap-2">
+            <form method="GET" action="{{ route('category.index') }}" class="w-full md:w-auto flex items-center gap-2">
                 <div class="join w-full">
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search Item..."
                         class="input input-bordered input-sm join-item w-full" />

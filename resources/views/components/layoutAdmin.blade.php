@@ -20,7 +20,7 @@
                 <div class="flex items-center gap-3">
                     <!-- Theme Toggle -->
                     <div class="dropdown dropdown-end shadow-md">
-                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle" id="theme-btn">
+                        <div tabindex="0" role="button" class="cursor-pointer" id="theme-btn">
                             <!-- icon light theme -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-palette" viewBox="0 0 16 16">
@@ -90,8 +90,8 @@
                             </div>
                         </div>
                         <ul tabindex="0"
-                            class="menu dropdown-content z-[1] p-2 shadow-lg bg-base-200 rounded-box w-52 mt-4">
-                            <li>
+                            class="menu dropdown-content z-[1] p-2 shadow-lg bg-base-200 rounded-box w-52 mt-4 cursor-pointer">
+                            <li class="cursor-pointer">
                                 <form action="{{ url('/logout') }}" method="post">
                                     @csrf
                                     <button type="submit">Logout</button>

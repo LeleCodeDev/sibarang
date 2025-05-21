@@ -38,7 +38,7 @@
         {{-- Description --}}
         <div class="form-control mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" id="description" rows="3"
+            <textarea name="description" id="description" rows="6"
                 class="textarea textarea-bordered w-full @error('description') textarea-error @enderror"
                 placeholder="Enter item description">{{ old('description') }}</textarea>
             @error('description')
@@ -64,8 +64,8 @@
         {{-- Image --}}
         <div class="form-control mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="file" name="image" id="image"
-            onchange="previewImage(event)"
+            <img src="" class="rounded w-full" id="image-preview-add" alt="">
+            <input type="file" name="image" id="image" onchange="previewImage(event)"
                 class="file-input file-input-bordered w-full @error('image') input-error @enderror">
             @error('image')
                 <label class="label">
@@ -77,23 +77,31 @@
         {{-- Action Buttons --}}
         <div class="modal-action">
             <button type="submit" class="btn btn-primary">Save</button>
-            <button type="button" class="btn" onclick="add_modal.close()">Cancel</button>
+            <button type="button" class="btn" onclick="add_modal.close(); resetImage()">Cancel</button>
         </div>
     </form>
     <script>
         function previewImage(event) {
             const input = event.target;
-            const preview = document.getElementById('image-preview');
+            const preview = document.getElementById('image-preview-add');
 
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
 
                 reader.onload = function(e) {
                     preview.src = e.target.result;
+                    preview.classList.add('my-3')
                 };
 
                 reader.readAsDataURL(input.files[0]);
             }
+        }
+
+        function resetImage() {
+            const preview = document.getElementById('image-preview-add');
+            preview.src = '';
+            preview.classList.remove('my-3')
+
         }
     </script>
 </dialog>

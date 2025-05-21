@@ -42,7 +42,7 @@
             {{-- Description --}}
             <div class="form-control mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea name="description" id="description" rows="3"
+                <textarea name="description" id="description" rows="6"
                     class="textarea textarea-bordered w-full @error('description') textarea-error @enderror"
                     placeholder="Enter item description">{{ old('description', $item->description) }}</textarea>
                 @error('description')
