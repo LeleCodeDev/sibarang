@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
@@ -13,13 +14,19 @@ class ItemController extends Controller
     {
         $search = $request->input('search');
 
+        $role = Auth::user()->role;
+
         $items = Item::when($search, function ($query, $search) {
             $query->where('name', 'like', "%$search%");
         })->with('category')->latest()->paginate(10);
 
         $categories = Category::all();
 
-        return view('Admin.Item.index', compact('items', 'categories'));
+        if($role == 'admin') {
+            return view('Admin.Item.index', compact('items', 'categories'));
+        } elseif($role == 'operator') {
+            return view('Operator.Item.index', compact('items', 'categories'));
+        }
     }
 
     /**

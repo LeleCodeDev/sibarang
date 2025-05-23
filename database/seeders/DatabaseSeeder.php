@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\BorrowRequest;
 use App\Models\Category;
 use App\Models\Item;
 use App\Models\User;
@@ -15,17 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => 'admin#1234',
-            'role' => 'admin'
-        ]);
-        
-        User::factory(10)->create();
+        // User::factory()->create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@admin.com',
+        //     'password' => 'admin#1234',
+        //     'role' => 'admin'
+        // ]);
 
-        Category::factory(10)->create();
-        Item::factory(10)->create();
+        // User::factory(10)->create();
 
+        // Category::factory(10)->create();
+        // Item::factory(10)->create();
+
+        BorrowRequest::factory(20)->create();
     }
 }

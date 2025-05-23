@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BorrowRequestController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
@@ -28,6 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('/item', ItemController::class);
 
     Route::resource('/category', CategoryController::class);
+  });
+
+  Route::middleware('role:operator')->group(function() {
+    Route::get('/item', [ItemController::class, 'index'])->name('item.index');
+    Route::resource('/borrow-request', BorrowRequestController::class);
   });
 
   Route::post('/logout', [AuthController::class, 'logout']);
