@@ -7,6 +7,7 @@ use App\Http\Controllers\BorrowRequestController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
+use App\Models\BorrowRequest;
 
 Route::get('/', [HomeController::class, 'index'])->name('landing');
 
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
   Route::middleware('role:operator')->group(function() {
     Route::get('/item', [ItemController::class, 'index'])->name('item.index');
     Route::resource('/borrow-request', BorrowRequestController::class);
+    Route::put('/borrow-request/{id}/approve', [BorrowRequestController::class, 'approve'])->name('borrow-request.approve');
+    Route::put('/borrow-request/{id}/reject', [BorrowRequestController::class, 'reject'])->name('borrow-request.reject');
   });
 
   Route::post('/logout', [AuthController::class, 'logout']);

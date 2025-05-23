@@ -112,7 +112,7 @@
 
                                                 @if ($request->status == 'processed')
                                                     <li>
-                                                        <form action="" method="POST">
+                                                        <form action="{{ route('borrow-request.approve', $request->id) }}" method="POST">
                                                             @csrf
                                                             @method('PUT')
                                                             <button type="submit"
@@ -128,7 +128,7 @@
                                                         </form>
                                                     </li>
                                                     <li>
-                                                        <form action="" method="POST">
+                                                        <form action="{{ route('borrow-request.reject', $request->id) }}" method="POST">
                                                             @csrf
                                                             @method('PUT')
                                                             <button type="submit"

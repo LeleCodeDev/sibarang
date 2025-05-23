@@ -107,8 +107,10 @@ class BorrowRequestController extends Controller
     /**
      * Approve the borrow request.
      */
-    public function approve(BorrowRequest $borrowRequest)
+    public function approve($id)
     {
+        $borrowRequest = BorrowRequest::findOrFail($id);
+
         // Check if the request is processed
         if ($borrowRequest->status !== 'processed') {
             return back()->with('error', 'This request has already been processed.');
@@ -150,8 +152,10 @@ class BorrowRequestController extends Controller
     /**
      * Reject the borrow request.
      */
-    public function reject(BorrowRequest $borrowRequest)
+    public function reject($id)
     {
+        $borrowRequest = BorrowRequest::findOrFail($id);
+
         // Check if the request is processed
         if ($borrowRequest->status !== 'processed') {
             return back()->with('error', 'This request has already been processed.');
