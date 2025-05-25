@@ -32,7 +32,7 @@ class BorrowRequestController extends Controller
             $query->where('status', $request->status);
         }
 
-        $borrowRequests = $query->latest()->paginate(10);
+        $borrowRequests = $query->latest()->paginate(10)->withQueryString();
 
         return view('Operator.Request.index', compact('borrowRequests'));
     }
@@ -178,8 +178,10 @@ class BorrowRequestController extends Controller
     /**
      * Mark items as returned.
      */
-    public function markAsReturned(BorrowRequest $borrowRequest)
+    public function markAsReturn($id)
     {
+        $borrowRequest = BorrowRequest::findOrFail($id);
+
         // Check if the request is approved
         if ($borrowRequest->status !== 'approved') {
             return back()->with('error', 'Only approved requests can be marked as returned.');

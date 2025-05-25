@@ -93,14 +93,14 @@ f
                                     <tr>
                                         <td>
                                             <div class="flex items-center gap-2">
-                                                @if ($item->item->image)
+                                                {{-- @if ($item->item->image)
                                                     <div class="avatar">
                                                         <div class="w-8 h-8 rounded">
                                                             <img src="{{ asset('storage/' . $item->item->image) }}"
                                                                 alt="{{ $item->item->name }}">
                                                         </div>
                                                     </div>
-                                                @endif
+                                                @endif --}}
                                                 <span>{{ $item->item->name }}</span>
                                             </div>
                                         </td>

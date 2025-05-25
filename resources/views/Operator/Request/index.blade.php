@@ -23,9 +23,9 @@
                 </div>
             </form>
 
-            <form method="GET" action="" class="w-full md:w-auto">
-                <div class="join">
-                    <select name="status" class="select select-bordered select-sm join-item">
+            <form method="GET" action="{{ route('borrow-request.index') }}" class="w-full md:w-auto">
+                <div class="join w-full md:w-auto">
+                    <select name="status" class="w-full md:w-auto select select-bordered select-sm join-item">
                         <option value="">All Status</option>
                         <option value="processed" {{ request('status') == 'processed' ? 'selected' : '' }}>Processed
                         </option>
@@ -62,20 +62,20 @@
                                     <th>{{ $loop->iteration + ($borrowRequests->currentPage() - 1) * $borrowRequests->perPage() }}
                                     </th>
                                     <td>{{ $request->borrower->name }}</td>
-                                    <td class="max-w-[200px]">
-                                        <div class="flex flex-wrap gap-1">
+                                    <td class="max-w-[200px] align-top">
+                                        <ul class="text-sm space-y-1 list-decimal list-inside">
                                             @foreach ($request->requestItems as $requestItem)
-                                                <span class="badge badge-sm">{{ $requestItem->item->name }}
-                                                    ({{ $requestItem->quantity }})
-                                                </span>
+                                                <li>
+                                                    {{ $requestItem->item->name }} ({{ $requestItem->quantity }})
+                                                </li>
                                             @endforeach
-                                        </div>
+                                        </ul>
                                     </td>
                                     <td>{{ \Carbon\Carbon::parse($request->request_date)->format('d M Y') }}</td>
                                     <td>{{ \Carbon\Carbon::parse($request->return_date)->format('d M Y') }}</td>
                                     <td>
                                         @if ($request->status == 'processed')
-                                            <span class="badge badge-warning">processed</span>
+                                            <span class="badge badge-warning">Processed</span>
                                         @elseif($request->status == 'approved')
                                             <span class="badge badge-success">Approved</span>
                                         @elseif($request->status == 'rejected')
@@ -112,7 +112,9 @@
 
                                                 @if ($request->status == 'processed')
                                                     <li>
-                                                        <form action="{{ route('borrow-request.approve', $request->id) }}" method="POST">
+                                                        <form
+                                                            action="{{ route('borrow-request.approve', $request->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('PUT')
                                                             <button type="submit"
@@ -128,7 +130,9 @@
                                                         </form>
                                                     </li>
                                                     <li>
-                                                        <form action="{{ route('borrow-request.reject', $request->id) }}" method="POST">
+                                                        <form
+                                                            action="{{ route('borrow-request.reject', $request->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('PUT')
                                                             <button type="submit"
@@ -150,7 +154,9 @@
 
                                                 @if ($request->status == 'approved')
                                                     <li>
-                                                        <form action="" method="POST">
+                                                        <form
+                                                            action="{{ route('borrow-request.return', $request->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('PUT')
                                                             <button type="submit"

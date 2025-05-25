@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/borrow-request', BorrowRequestController::class);
     Route::put('/borrow-request/{id}/approve', [BorrowRequestController::class, 'approve'])->name('borrow-request.approve');
     Route::put('/borrow-request/{id}/reject', [BorrowRequestController::class, 'reject'])->name('borrow-request.reject');
+    Route::put('/borrow-request/{id}/return', [BorrowRequestController::class, 'markAsReturn'])->name('borrow-request.return');
   });
 
   Route::post('/logout', [AuthController::class, 'logout']);

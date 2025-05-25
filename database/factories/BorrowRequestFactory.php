@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\BorrowItem;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,11 +19,22 @@ class BorrowRequestFactory extends Factory
     public function definition(): array
     {
         return [
-            'borrower_id' => User::factory()->peminjam()->create(), // assumes User model used for borrower
-            'operator_id' => User::factory()->operator()->create(), // same here, change if using separate models
+            'borrower_id' => User::factory()->peminjam()->create(),
+            'operator_id' => User::factory()->operator()->create(),
             'status' => $this->faker->randomElement(['processed', 'approved', 'rejected', 'returned']),
             'request_date' => $this->faker->dateTimeBetween('-1 week', 'now'),
             'return_date' => $this->faker->dateTimeBetween('now', '+1 week'),
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function ($borrowRequest) {
+            BorrowItem::factory()
+                ->count(rand(2, 5))
+                ->create([
+                    'borrow_request_id' => $borrowRequest->id,
+                ]);
+        });
     }
 }

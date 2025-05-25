@@ -17,10 +17,10 @@ class ItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_id' => rand(1, 10), 
-            'name' => $this->faker->words(3, true), 
-            'description' => $this->faker->paragraph(), 
-            'quantity' => rand(1, 100), 
+            'category_id' => rand(5, 10),
+            'name' => $this->faker->words(3, true),
+            'description' => $this->faker->paragraph(),
+            'quantity' => rand(1, 100),
             'image' => $this->faker->imageUrl(640, 480, 'technics'),
             'status' => $this->faker->randomElement(['available', 'unavailable']),
         ];
