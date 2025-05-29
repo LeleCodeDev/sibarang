@@ -24,7 +24,7 @@ class AuthController extends Controller
             if ($userRole == 'admin') {
                 return redirect()->route('Admin.Dashboard');
             } elseif ($userRole == 'operator') {
-                return redirect()->route('item.index');
+                return redirect()->route('borrow-request.index');
             } elseif ($userRole == 'peminjam') {
                 return redirect()->route('home');
             } else {

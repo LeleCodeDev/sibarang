@@ -136,18 +136,32 @@ f
         <!-- Action Buttons (Only for processed requests) -->
         @if ($request->status == 'processed')
             <div class="modal-action">
-                <form action="" method="POST">
+                <form action="{{ route('borrow-request.reject', $request->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <button type="submit" class="btn btn-error">Reject</button>
                 </form>
 
-                <form action="" method="POST">
+                <form action="{{ route('borrow-request.approve', $request->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <button type="submit" class="btn btn-success">Approve</button>
                 </form>
             </div>
         @endif
+
+        @if ($request->status == 'approved')
+            <div class="modal-action">
+                <form action="{{ route('borrow-request.return', $request->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit" class="btn btn-info">Mark as returned</button>
+                </form>
+            </div>
+        @endif
     </div>
+
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
 </dialog>
