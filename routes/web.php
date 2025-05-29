@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 use App\Models\BorrowRequest;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'index'])->name('landing');
 
@@ -38,6 +39,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/borrow-request/{id}/approve', [BorrowRequestController::class, 'approve'])->name('borrow-request.approve');
     Route::put('/borrow-request/{id}/reject', [BorrowRequestController::class, 'reject'])->name('borrow-request.reject');
     Route::put('/borrow-request/{id}/return', [BorrowRequestController::class, 'markAsReturn'])->name('borrow-request.return');
+  });
+
+  Route::middleware('role:peminjam')->group(function() {
+    // Route::view('/home', 'Peminjam.home', ['username' => Auth::user()->name])->name('home');
+    Route::get('/home', function() {
+        return view('Peminjam.home', ['username' => Auth::user()->name]);
+    })->name('home');
   });
 
   Route::post('/logout', [AuthController::class, 'logout']);
