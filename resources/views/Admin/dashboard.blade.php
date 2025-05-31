@@ -1,105 +1,81 @@
 <x-layoutAdmin>
     <div class="p-6 space-y-6">
-        {{-- Page Header --}}
         <div class="flex justify-between items-center">
             <h2 class="text-2xl font-bold">Dashboard Inventaris</h2>
 
         </div>
 
-        {{-- Statistik Utama --}}
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="card bg-primary text-primary-content shadow-xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+            <!-- Total Peminjaman -->
+            <div class="card bg-base-200 shadow-md">
                 <div class="card-body">
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 rounded-lg bg-primary/20">
+                            <i class="fa-solid fa-inbox text-primary text-xl"></i>
+                        </div>
                         <div>
-                            <h4 class="card-title">Total Peminjaman</h4>
-                            <p class="text-3xl font-bold mt-2">19</p>
-                        </div>
-                        <div class="avatar placeholder">
-                            <div class="bg-primary-focus text-primary-content rounded-full w-12">
-                                <span class="text-xl">
-                                    <i class="fa-solid fa-inbox"></i>
-                                </span>
-                            </div>
+                            <p class="text-sm text-base-content/70">Total Peminjaman</p>
+                            <p class="text-xl font-bold">19</p>
                         </div>
                     </div>
-                    <p class="text-sm mt-2">Seluruh barang dipinjam</p>
-                    <div class="mt-2">
-                        <progress class="progress progress-secondary" value="70" max="100"></progress>
-                    </div>
+                    <p class="text-sm mt-4 text-base-content/70">Seluruh barang dipinjam</p>
+                    <progress class="progress progress-primary mt-2" value="70" max="100"></progress>
                 </div>
             </div>
 
-            <div class="card bg-secondary text-secondary-content shadow-xl">
+            <!-- Barang Belum Kembali -->
+            <div class="card bg-base-200 shadow-md">
                 <div class="card-body">
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 rounded-lg bg-secondary/20">
+                            <i class="fa-solid fa-clock text-secondary text-xl"></i>
+                        </div>
                         <div>
-                            <h4 class="card-title">Barang Belum Kembali</h4>
-                            <p class="text-3xl font-bold mt-2">18</p>
-                        </div>
-                        <div class="avatar placeholder">
-                            <div class="bg-secondary-focus text-secondary-content rounded-full w-12">
-                                <span class="text-xl">
-                                    <i class="fa-solid fa-clock"></i>
-                                </span>
-                            </div>
+                            <p class="text-sm text-base-content/70">Barang Belum Kembali</p>
+                            <p class="text-xl font-bold">18</p>
                         </div>
                     </div>
-                    <p class="text-sm mt-2">Sedang dalam masa pinjam</p>
-                    <div class="mt-2">
-                        <progress class="progress progress-primary" value="27" max="124"></progress>
-                    </div>
+                    <p class="text-sm mt-4 text-base-content/70">Sedang dalam masa pinjam</p>
+                    <progress class="progress progress-secondary mt-2" value="27" max="124"></progress>
                 </div>
             </div>
 
-            <div class="card bg-accent text-accent-content shadow-xl">
+            <!-- Sudah Dikembalikan -->
+            <div class="card bg-base-200 shadow-md">
                 <div class="card-body">
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 rounded-lg bg-accent/20">
+                            <i class="fa-solid fa-check-circle text-accent text-xl"></i>
+                        </div>
                         <div>
-                            <h4 class="card-title">Sudah Dikembalikan</h4>
-                            <p class="text-3xl font-bold mt-2">1</p>
-                        </div>
-                        <div class="avatar placeholder">
-                            <div class="bg-accent-focus text-accent-content rounded-full w-12">
-                                <span class="text-xl">
-                                    <i class="fa-solid fa-check-circle"></i>
-                                </span>
-                            </div>
+                            <p class="text-sm text-base-content/70">Sudah Dikembalikan</p>
+                            <p class="text-xl font-bold">1</p>
                         </div>
                     </div>
-                    <p class="text-sm mt-2">Barang yang sudah kembali</p>
-                    <div class="mt-2">
-                        <progress class="progress progress-primary" value="97" max="124"></progress>
-                    </div>
+                    <p class="text-sm mt-4 text-base-content/70">Barang yang sudah kembali</p>
+                    <progress class="progress progress-accent mt-2" value="97" max="124"></progress>
                 </div>
             </div>
 
-            <div class="card bg-info text-info-content shadow-xl">
+            <!-- Barang Favorit -->
+            <div class="card bg-base-200 shadow-md">
                 <div class="card-body">
-                    <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 rounded-lg bg-info/20">
+                            <i class="fa-solid fa-star text-info text-xl"></i>
+                        </div>
                         <div>
-                            <h4 class="card-title">Barang Favorit</h4>
-                            <p class="text-3xl font-bold mt-2">Laptop</p>
-                        </div>
-                        <div class="avatar placeholder">
-                            <div class="bg-info-focus text-info-content rounded-full w-12">
-                                <span class="text-xl">
-                                    <i class="fa-solid fa-star"></i>
-                                </span>
-                            </div>
+                            <p class="text-sm text-base-content/70">Barang Favorit</p>
+                            <p class="text-xl font-bold">Laptop</p>
                         </div>
                     </div>
-                    <p class="text-sm mt-2">Paling sering dipinjam</p>
-                    <div class="mt-2">
-                        <progress class="progress progress-primary" value="85" max="100"></progress>
-                    </div>
+                    <p class="text-sm mt-4 text-base-content/70">Paling sering dipinjam</p>
                 </div>
             </div>
         </div>
 
-        {{-- Charts Section --}}
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 ">
-            {{-- Chart 1: Peminjaman Mingguan --}}
+
+        <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 ">
             <div class="card bg-base-200 shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title">Peminjaman Mingguan</h3>
@@ -107,7 +83,6 @@
                 </div>
             </div>
 
-            {{-- Chart 2: Kategori Peminjaman --}}
             <div class="card bg-base-200 shadow-xl">
                 <div class="card-body">
                     <h3 class="card-title">Kategori Peminjaman</h3>
@@ -116,7 +91,6 @@
             </div>
         </div>
 
-        {{-- Aktivitas Terbaru --}}
         <div class="card bg-base-200 shadow-xl">
             <div class="card-body">
                 <h3 class="card-title">Aktivitas Terbaru</h3>
@@ -148,7 +122,9 @@
                                 <td>Meminjam</td>
                                 <td>Proyektor</td>
                                 <td>2 menit lalu</td>
-                                <td><div class="badge badge-primary">Dipinjam</div></td>
+                                <td>
+                                    <div class="badge badge-primary">Dipinjam</div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -166,7 +142,9 @@
                                 <td>Mengembalikan</td>
                                 <td>Laptop</td>
                                 <td>10 menit lalu</td>
-                                <td><div class="badge badge-accent">Dikembalikan</div></td>
+                                <td>
+                                    <div class="badge badge-accent">Dikembalikan</div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -184,7 +162,9 @@
                                 <td>Meminjam</td>
                                 <td>Kamera</td>
                                 <td>30 menit lalu</td>
-                                <td><div class="badge badge-primary">Dipinjam</div></td>
+                                <td>
+                                    <div class="badge badge-primary">Dipinjam</div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -202,7 +182,9 @@
                                 <td>Meminjam</td>
                                 <td>Microphone</td>
                                 <td>1 jam lalu</td>
-                                <td><div class="badge badge-primary">Dipinjam</div></td>
+                                <td>
+                                    <div class="badge badge-primary">Dipinjam</div>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -220,7 +202,9 @@
                                 <td>Meminjam</td>
                                 <td>Speaker</td>
                                 <td>2 jam lalu</td>
-                                <td><div class="badge badge-primary">Dipinjam</div></td>
+                                <td>
+                                    <div class="badge badge-primary">Dipinjam</div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -229,29 +213,32 @@
         </div>
     </div>
 
-    {{-- Make sure to include Font Awesome for icons --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    {{-- Include ApexCharts --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.40.0/apexcharts.min.js"></script>
 
     <script>
         // Initialize charts when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize Weekly Chart
+            // Updated Weekly Chart Options
             const weeklyChartOptions = {
                 series: [{
-                    name: 'Peminjaman',
-                    data: [31, 40, 28, 51, 42, 33, 44]
-                }, {
-                    name: 'Pengembalian',
-                    data: [25, 32, 26, 41, 40, 28, 37]
-                }],
+                        name: 'Peminjaman',
+                        data: [31, 40, 28, 51, 42, 33, 44]
+                    },
+                    {
+                        name: 'Pengembalian',
+                        data: [25, 32, 26, 41, 40, 28, 37]
+                    }
+                ],
                 chart: {
                     height: 250,
-                    type: 'line',
+                    type: 'area',
                     toolbar: {
                         show: false
-                    }
+                    },
+                    fontFamily: 'inherit',
+                    foreColor: '#a3a3a3',
                 },
                 colors: ['#36D399', '#3ABFF8'],
                 dataLabels: {
@@ -261,47 +248,74 @@
                     curve: 'smooth',
                     width: 3
                 },
-                grid: {
-                    borderColor: '#e0e0e0',
-                    row: {
-                        colors: ['transparent']
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.4,
+                        opacityTo: 0,
+                        stops: [0, 100]
                     }
+                },
+                grid: {
+                    borderColor: '#E5E7EB',
+                    strokeDashArray: 4,
                 },
                 xaxis: {
                     categories: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
                     labels: {
                         style: {
-                            colors: '#718096'
+                            colors: '#9CA3AF',
+                            fontSize: '12px'
                         }
                     }
                 },
                 yaxis: {
                     labels: {
                         style: {
-                            colors: '#718096'
+                            colors: '#9CA3AF',
+                            fontSize: '12px'
                         }
                     }
                 },
                 legend: {
                     position: 'top',
-                    horizontalAlign: 'right'
+                    horizontalAlign: 'right',
+                    labels: {
+                        colors: '#6B7280'
+                    }
                 },
                 tooltip: {
                     theme: 'dark'
                 }
             };
 
+
             // Initialize Category Chart
+            // Updated Category Chart Options
             const categoryChartOptions = {
                 series: [44, 55, 13, 33, 22],
                 chart: {
-                    height: 250,
                     type: 'donut',
+                    height: 250,
+                    fontFamily: 'inherit',
+                    foreColor: '#a3a3a3'
                 },
                 labels: ['Laptop', 'Proyektor', 'Kamera', 'Speaker', 'Lainnya'],
                 colors: ['#FF9F43', '#36D399', '#3ABFF8', '#F87272', '#A78BFA'],
                 legend: {
-                    position: 'bottom'
+                    position: 'bottom',
+                    labels: {
+                        colors: '#6B7280'
+                    }
+                },
+                dataLabels: {
+                    style: {
+                        colors: ['#ffffff']
+                    }
+                },
+                tooltip: {
+                    theme: 'dark'
                 },
                 responsive: [{
                     breakpoint: 480,
@@ -313,11 +327,9 @@
                             position: 'bottom'
                         }
                     }
-                }],
-                tooltip: {
-                    theme: 'dark'
-                }
+                }]
             };
+
 
             const weeklyChart = new ApexCharts(document.querySelector("#weeklyChart"), weeklyChartOptions);
             const categoryChart = new ApexCharts(document.querySelector("#categoryChart"), categoryChartOptions);

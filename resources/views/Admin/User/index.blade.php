@@ -8,7 +8,7 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <div class="card bg-primary text-primary-content shadow-xl transition-all duration-300">
+            {{-- <div class="card bg-primary text-primary-content shadow-xl transition-all duration-300">
                 <div class="card-body">
                     <div class="flex items-center justify-between">
                         <h2 class="card-title font-bold">Total Operator</h2>
@@ -47,7 +47,46 @@
                         <span class="text-xs opacity-70">Registered users</span>
                     </div>
                 </div>
+            </div> --}}
+            <div class="card bg-base-200 shadow-md">
+                <div class="card-body">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-lg bg-primary/20">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-primary" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="card-title text-base-content/70">Total Operator</h2>
+                            <p class="text-2xl font-bold">{{ $operatorCount }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="card bg-base-200 shadow-md">
+                <div class="card-body">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 rounded-lg bg-secondary/20">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="text-secondary">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="card-title text-base-content/70">Total Peminjam</h2>
+                            <p class="text-2xl font-bold">{{ $peminjamCount }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="flex flex-col sm:flex-row w-full justify-between gap-4 mb-4">
@@ -62,8 +101,8 @@
 
             <form method="GET" action="{{ route('user.index') }}" class="w-full md:w-auto flex items-center gap-2">
                 <div class="join w-full">
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search user..."
-                        class="input input-bordered input-sm join-item w-full" />
+                    <input type="text" name="search" value="{{ request('search') }}"
+                        placeholder="Search user..." class="input input-bordered input-sm join-item w-full" />
                     <button type="submit" class="btn btn-sm btn-primary join-item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

@@ -43,16 +43,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('role:peminjam')->group(function () {
         // Route::view('/home', 'Peminjam.home', ['username' => Auth::user()->name])->name('home');
-        Route::get('/home', function () {
-            return view('Peminjam.home', [
-                'username' => Auth::user()->name,
-                'totalPeminjaman' => '',
-                'sedangDipinjam' => '',
-                'telahDikembalikan' => '',
-                'terlambat' => '',
-                'recentBorrowings' => [],
-            ]);
-        })->name('home');
+        Route::get('/home', [HomeController::class, 'indexHome'])->name('home');
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);

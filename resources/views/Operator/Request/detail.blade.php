@@ -69,7 +69,7 @@
                                 <span class="text-base-content/70">Phone:</span>
                                 <span class="col-span-2 font-medium">{{ $request->borrower->phone }}</span>
                             @endif
-f
+
                         </div>
                     </div>
                 </div>
