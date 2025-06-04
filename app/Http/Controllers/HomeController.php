@@ -36,7 +36,7 @@ class HomeController extends Controller
             ->count();
 
         $recentBorrowings = BorrowRequest::where('borrower_id', $user->id)
-            ->with('requestItems.item')
+            ->with('item')
             ->latest()
             ->take(5)
             ->get();

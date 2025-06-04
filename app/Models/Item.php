@@ -25,5 +25,8 @@ class Item extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    
+    public function borrowRequests()
+    {
+        return $this->hasMany(BorrowRequest::class);
+    }
 }

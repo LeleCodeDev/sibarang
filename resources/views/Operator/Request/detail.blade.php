@@ -89,7 +89,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($request->requestItems as $item)
+                                @foreach ($request->item as $item)
                                     <tr>
                                         <td>
                                             <div class="flex items-center gap-2">

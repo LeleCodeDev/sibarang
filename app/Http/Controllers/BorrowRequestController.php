@@ -15,14 +15,14 @@ class BorrowRequestController extends Controller
      */
     public function index(Request $request)
     {
-        $query = BorrowRequest::with(['borrower', 'operator', 'requestItems.item']);
+        $query = BorrowRequest::with(['borrower', 'operator', 'item']);
 
         // Search functionality
         if ($request->has('search') && !empty($request->search)) {
             $search = $request->search;
             $query->whereHas('borrower', function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%");
-            })->orWhereHas('requestItems.item', function ($q) use ($search) {
+            })->orWhereHas('item', function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%");
             });
         }
@@ -58,19 +58,8 @@ class BorrowRequestController extends Controller
             'request_date' => 'required|date|after_or_equal:today',
             'return_date' => 'required|date|after:request_date',
             'items' => 'required|array',
-            'items.*.id' => 'required|exists:items,id',
-            'items.*.quantity' => 'required|integer|min:1',
-            'notes' => 'nullable|string'
+            'items.id' => 'required|exists:items,id',
         ]);
-
-        // Check if all items are available in requested quantity
-        foreach ($request->items as $requestedItem) {
-            $item = Item::find($requestedItem['id']);
-
-            if (!$item || $item->quantity < $requestedItem['quantity']) {
-                return back()->with('error', "Item '{$item->name}' doesn't have enough quantity available.")->withInput();
-            }
-        }
 
         // Create borrow request
         $borrowRequest = BorrowRequest::create([
@@ -78,18 +67,8 @@ class BorrowRequestController extends Controller
             'status' => 'processed',
             'request_date' => $request->request_date,
             'return_date' => $request->return_date,
-            'notes' => $request->notes
+            'item_id' => $request->item_id,
         ]);
-
-        // Create request items
-        foreach ($request->items as $requestedItem) {
-            BorrowItem::create([
-                'borrow_request_id' => $borrowRequest->id,
-                'item_id' => $requestedItem['id'],
-                'quantity' => $requestedItem['quantity'],
-                'status' => 'processed'
-            ]);
-        }
 
         return redirect()->route('borrow-request.index')
             ->with('success', 'Borrow request created successfully.');
@@ -100,7 +79,7 @@ class BorrowRequestController extends Controller
      */
     public function show(BorrowRequest $borrowRequest)
     {
-        $borrowRequest->load(['borrower', 'operator', 'requestItems.item']);
+        $borrowRequest->load(['borrower', 'operator', 'item']);
         return view('Admin.BorrowRequest.show', compact('borrowRequest'));
     }
 
@@ -117,7 +96,7 @@ class BorrowRequestController extends Controller
         }
 
         // Check item availability
-        foreach ($borrowRequest->requestItems as $requestItem) {
+        foreach ($borrowRequest->item as $requestItem) {
             $item = $requestItem->item;
 
             if ($item->quantity < $requestItem->quantity) {
@@ -132,7 +111,7 @@ class BorrowRequestController extends Controller
         ]);
 
         // Update item quantities and status
-        foreach ($borrowRequest->requestItems as $requestItem) {
+        foreach ($borrowRequest->item as $requestItem) {
             $item = $requestItem->item;
             $item->quantity -= $requestItem->quantity;
 
@@ -168,7 +147,7 @@ class BorrowRequestController extends Controller
         ]);
 
         // Update request item status
-        foreach ($borrowRequest->requestItems as $requestItem) {
+        foreach ($borrowRequest->item as $requestItem) {
             $requestItem->update(['status' => 'rejected']);
         }
 
@@ -194,7 +173,7 @@ class BorrowRequestController extends Controller
         ]);
 
         // Return items to inventory
-        foreach ($borrowRequest->requestItems as $requestItem) {
+        foreach ($borrowRequest->item as $requestItem) {
             $item = $requestItem->item;
             $item->quantity += $requestItem->quantity;
             $item->status = 'available';

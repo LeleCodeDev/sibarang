@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -16,7 +15,9 @@ class BorrowRequest extends Model
         'operator_id',
         'status',
         'request_date',
-        'return_date'
+        'return_date',
+        'item_id',
+        'quantity'
     ];
 
     public function borrower(): BelongsTo
@@ -29,8 +30,8 @@ class BorrowRequest extends Model
         return $this->belongsTo(User::class, 'operator_id');
     }
 
-    public function requestItems(): HasMany
+    public function item(): BelongsTo
     {
-        return $this->hasMany(BorrowItem::class);
+        return $this->belongsTo(Item::class);
     }
 }

@@ -64,7 +64,7 @@
                                     <td>{{ $request->borrower->name }}</td>
                                     <td class="max-w-[200px] align-top">
                                         <ul class="text-sm space-y-1 list-decimal list-inside">
-                                            @foreach ($request->requestItems as $requestItem)
+                                            @foreach ($request->item as $requestItem)
                                                 <li>
                                                     {{ $requestItem->item->name }} ({{ $requestItem->quantity }})
                                                 </li>

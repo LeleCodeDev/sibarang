@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\BorrowItem;
+use App\Models\Item;
 use App\Models\User;
+use App\Models\BorrowItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,6 +23,8 @@ class BorrowRequestFactory extends Factory
             'borrower_id' => User::factory()->peminjam()->create(),
             'operator_id' => User::factory()->operator()->create(),
             'status' => $this->faker->randomElement(['processed', 'approved', 'rejected', 'returned']),
+            'item_id' => Item::factory(),
+            'quantity' => rand(1, 5),
             'request_date' => $this->faker->dateTimeBetween('-1 week', 'now'),
             'return_date' => $this->faker->dateTimeBetween('now', '+1 week'),
         ];

@@ -133,24 +133,96 @@
                         <tbody>
                             @forelse ($recentBorrowings ?? [] as $borrowing)
                                 {{-- @php
-                                    $firstItem = $borrowing->requestItems->first()->item ?? null;
+                                    $firstItem = $borrowing->item->first()->item ?? null;
                                 @endphp --}}
                                 <tr class="hover">
                                     <th>{{ $loop->iteration }}</th>
-                                    <td>
-                                        @foreach ($borrowing->requestItems as $requestItem)
-                                            @php
-                                                $item = $requestItem->item;
-                                            @endphp
-                                            <div class="flex items-center gap-3 mb-2">
-                                                <div class="avatar">
-                                                    <div class="mask mask-squircle w-12 h-12">
-                                                        <img src="{{ $item && $item->image ? asset('storage/' . $item->image) : asset('images/default.png') }}"
-                                                            alt="{{ $item->name ?? 'Unknown Item' }}" />
+                                    <td class="p-4">
+                                        {{-- <!-- Desktop View: Horizontal grid layout -->
+                                        <div class="hidden md:grid md:grid-cols-3 gap-4">
+                                            @foreach ($borrowing->item as $requestItem)
+                                                @php
+                                                    $item = $requestItem->item;
+                                                @endphp
+                                                <div
+                                                    class="flex flex-col items-center gap-2 p-3 bg-base-100 rounded-lg border border-base-300 hover:shadow-md transition-shadow">
+                                                    <div class="avatar">
+                                                        <div class="mask mask-squircle w-16 h-16">
+                                                            <img src="{{ $item && $item->image ? asset('storage/' . $item->image) : asset('images/default.png') }}"
+                                                                alt="{{ $item->name ?? 'Unknown Item' }}"
+                                                                class="object-cover" />
+                                                        </div>
+                                                    </div>
+                                                    <p class="text-sm font-medium text-center leading-tight">
+                                                        {{ $item->name }}</p>
+                                                    @if (isset($requestItem->quantity))
+                                                        <span
+                                                            class="badge badge-primary badge-sm">{{ $requestItem->quantity }}x</span>
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        <!-- Mobile View: Vertical list layout -->
+                                        <div class="md:hidden space-y-3">
+                                            @foreach ($borrowing->item as $requestItem)
+                                                @php
+                                                    $item = $requestItem->item;
+                                                @endphp
+                                                <div
+                                                    class="flex items-center gap-3 p-3 bg-base-100 rounded-lg border border-base-300">
+                                                    <div class="avatar flex-shrink-0">
+                                                        <div class="mask mask-squircle w-12 h-12">
+                                                            <img src="{{ $item && $item->image ? asset('storage/' . $item->image) : asset('images/default.png') }}"
+                                                                alt="{{ $item->name ?? 'Unknown Item' }}"
+                                                                class="object-cover" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-1 min-w-0">
+                                                        <p class="text-sm font-medium text-base-content truncate">
+                                                            {{ $item->name }}</p>
+                                                        @if (isset($requestItem->quantity))
+                                                            <span class="text-xs text-base-content/70">Quantity:
+                                                                {{ $requestItem->quantity }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
+                                            @endforeach
+                                        </div> --}}
+
+                                        {{-- <!-- Empty state -->
+                                        @if ($borrowing->item->isEmpty())
+                                            <div
+                                                class="flex flex-col items-center justify-center py-8 text-base-content/50">
+                                                <svg class="w-12 h-12 mb-2" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2 2v-5m16 0h-2M4 13h2m0 0V9a2 2 0 012-2h2m0 0V6a2 2 0 012-2h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V9M4 13v4h2m0-4h2m0 0v4">
+                                                    </path>
+                                                </svg>
+                                                <p class="text-sm">No items found</p>
                                             </div>
-                                        @endforeach
+                                        @endif --}}
+
+                                        <div
+                                            class="flex flex-col items-center gap-2 p-3 bg-base-100 rounded-lg border border-base-300 hover:shadow-md transition-shadow">
+                                            <div class="avatar flex-shrink-0">
+                                                <div class="mask mask-squircle w-12 h-12">
+                                                    <img src="{{ $borrowing->item && $borrowing->item->image ? asset('storage/' . $borrowing->item->image) : asset('images/default.png') }}"
+                                                        alt="{{ $borrowing->item->name ?? 'Unknown Item' }}"
+                                                        class="object-cover" />
+                                                </div>
+                                            </div>
+
+                                            <p class="text-sm font-medium text-center leading-tight">
+                                                {{ $borrowing->item->name }}
+                                            </p>
+
+                                            <span
+                                                class="badge badge-primary badge-sm">{{ $borrowing->quantity }}x
+                                            </span>
+                                        </div>
                                     </td>
 
                                     <td>{{ \Carbon\Carbon::parse($borrowing->request_date)->format('d M Y') }}</td>
