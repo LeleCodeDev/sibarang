@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
-use App\Models\BorrowItem;
 use Illuminate\Http\Request;
 use App\Models\BorrowRequest;
 use Illuminate\Support\Facades\Auth;
@@ -95,13 +94,9 @@ class BorrowRequestController extends Controller
             return back()->with('error', 'This request has already been processed.');
         }
 
-        // Check item availability
-        foreach ($borrowRequest->item as $requestItem) {
-            $item = $requestItem->item;
-
-            if ($item->quantity < $requestItem->quantity) {
-                return back()->with('error', "Item '{$item->name}' doesn't have enough quantity available.");
-            }
+        $item = $borrowRequest->item;
+        if ($item->quantity < $borrowRequest->quantity) {
+            return back()->with('error', "Item '{$item->name}' doesn't have enough quantity available.");
         }
 
         // Update request status
@@ -111,19 +106,13 @@ class BorrowRequestController extends Controller
         ]);
 
         // Update item quantities and status
-        foreach ($borrowRequest->item as $requestItem) {
-            $item = $requestItem->item;
-            $item->quantity -= $requestItem->quantity;
+        $item->quantity -= $borrowRequest->quantity;
 
-            if ($item->quantity <= 0) {
-                $item->status = 'not_available';
-            }
-
-            $item->save();
-
-            // Update request item status
-            $requestItem->update(['status' => 'approved']);
+        if ($item->quantity <= 0) {
+            $item->status = 'not_available';
         }
+
+        $item->save();
 
         return back()->with('success', 'Borrow request approved successfully.');
     }
@@ -145,11 +134,6 @@ class BorrowRequestController extends Controller
             'status' => 'rejected',
             'operator_id' => Auth::id()
         ]);
-
-        // Update request item status
-        foreach ($borrowRequest->item as $requestItem) {
-            $requestItem->update(['status' => 'rejected']);
-        }
 
         return back()->with('success', 'Borrow request rejected successfully.');
     }
@@ -173,15 +157,13 @@ class BorrowRequestController extends Controller
         ]);
 
         // Return items to inventory
-        foreach ($borrowRequest->item as $requestItem) {
-            $item = $requestItem->item;
-            $item->quantity += $requestItem->quantity;
-            $item->status = 'available';
-            $item->save();
+        $item = $borrowRequest->item;
+        $item->quantity += $borrowRequest->quantity;
+        $item->status = 'available';
+        $item->save();
 
-            // Update request item status
-            $requestItem->update(['status' => 'returned']);
-        }
+        // Update request item status
+        $borrowRequest->update(['status' => 'returned']);
 
         return back()->with('success', 'Items have been marked as returned successfully.');
     }

@@ -30,7 +30,6 @@ class AuthController extends Controller
             } else {
                 return redirect()->route('landing');
             }
-
         } else {
             return back()->withErrors([
                 'failed' => 'The provided credentials does not match our records'

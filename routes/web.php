@@ -7,8 +7,6 @@ use App\Http\Controllers\BorrowRequestController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
-use App\Models\BorrowRequest;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'index'])->name('landing');
 
@@ -42,8 +40,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('role:peminjam')->group(function () {
-        // Route::view('/home', 'Peminjam.home', ['username' => Auth::user()->name])->name('home');
         Route::get('/home', [HomeController::class, 'indexHome'])->name('home');
+        Route::get('/item-list', [ItemController::class, 'index'])->name('item.item-list');
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);

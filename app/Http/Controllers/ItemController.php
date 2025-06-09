@@ -13,20 +13,23 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-
         $role = Auth::user()->role;
 
-        $items = Item::when($search, function ($query, $search) {
-            $query->where('name', 'like', "%$search%");
-        })->with('category')->latest()->paginate(10);
+        $query = Item::with('category')
+            ->when($search, fn ($q) => $q->where('name', 'like', "%$search%"))
+            ->latest();
 
+        $itemsPerPage = $role === 'peminjam' ? 9 : 10;
+        $items = $query->paginate($itemsPerPage);
+        //$items = [];
         $categories = Category::all();
 
-        if($role == 'admin') {
-            return view('Admin.Item.index', compact('items', 'categories'));
-        } elseif($role == 'operator') {
-            return view('Operator.Item.index', compact('items', 'categories'));
-        }
+        return match ($role) {
+            'peminjam' => view('Peminjam.Item.index', compact('items', 'categories')),
+            'admin'    => view('Admin.Item.index', compact('items', 'categories')),
+            'operator' => view('Operator.Item.index', compact('items', 'categories')),
+            default    => abort(403, 'Unauthorized access'),
+        };
     }
 
     /**
