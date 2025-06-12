@@ -1,5 +1,5 @@
 <!-- Item Detail Modal -->
-<dialog id="detail_modal_{{ $item->id }}" class="modal modal-bottom sm:modal-middle">
+<dialog id="detail_modal_{{ $item->id }}" class="modal modal-bottom md:modal-middle">
   <div class="modal-box bg-base-100 w-full space-y-2" style="max-width:70rem;">
     <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"

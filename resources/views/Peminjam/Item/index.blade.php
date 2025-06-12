@@ -23,9 +23,10 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-8">
         @forelse ($items as $item)
           <div
-            class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-base-300/50 group">
+            class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 md:hover:-translate-y-0 border border-base-300/50 group">
             <!-- Image Container with Overlay -->
-            <figure class="relative overflow-hidden rounded-t-2xl">
+            <figure onclick="detail_modal_{{ $item->id }}.showModal()"
+              class="relative overflow-hidden rounded-t-2xl">
               <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
                 class="h-56 w-full object-cover transition-transform duration-300 group-hover:scale-110" />
               <div
@@ -60,7 +61,7 @@
               <!-- Status and Actions -->
               <div class="flex items-center justify-end gap-3 mt-auto">
                 <button onclick="detail_modal_{{ $item->id }}.showModal()"
-                  class="btn btn-secondary
+                  class="btn btn-secondary hidden md:flex
                   btn-sm transition-all duration-300 shadow-lg hover:shadow-xl group/btn">
                   <svg class="w-4 h-4  transition-transform group-hover/btn:rotate-45"
                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -72,7 +73,8 @@
                   Detail
                 </button>
 
-                <button class="btn btn-primary btn-sm  transition-all duration-300 shadow-lg hover:shadow-xl group/btn">
+                <button onclick="borrow_modal_{{ $item->id }}.showModal()"
+                  class="btn btn-primary btn-sm  transition-all duration-300 shadow-lg hover:shadow-xl group/btn">
                   <svg class="w-4 h-4  transition-transform group-hover/btn:rotate-45" fill="none"
                     stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -86,6 +88,7 @@
 
 
           @include('Peminjam.Item.detail')
+          @include('Peminjam.Item.borrow')
         @empty
           <div class="text-center py-16 col-span-4">
             <div class="bg-base-100 rounded-2xl shadow-lg p-12 border border-base-300 max-w-md mx-auto">

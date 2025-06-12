@@ -29,15 +29,4 @@ class BorrowRequestFactory extends Factory
             'return_date' => $this->faker->dateTimeBetween('now', '+1 week'),
         ];
     }
-
-    public function configure(): static
-    {
-        return $this->afterCreating(function ($borrowRequest) {
-            BorrowItem::factory()
-                ->count(rand(2, 5))
-                ->create([
-                    'borrow_request_id' => $borrowRequest->id,
-                ]);
-        });
-    }
 }

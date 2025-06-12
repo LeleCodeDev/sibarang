@@ -51,25 +51,32 @@ class BorrowRequestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $itemId)
     {
-        $request->validate([
-            'request_date' => 'required|date|after_or_equal:today',
-            'return_date' => 'required|date|after:request_date',
-            'items' => 'required|array',
-            'items.id' => 'required|exists:items,id',
+        $user = Auth::user();
+        $item = Item::findOrFail($itemId);
+
+        $validated = $request->validate([
+            'quantity' => 'required|integer|min:1',
+            'return_date' => 'required|date',
         ]);
 
-        // Create borrow request
-        $borrowRequest = BorrowRequest::create([
-            'borrower_id' => Auth::id(),
+        if ($item->quantity < $validated['quantity']) {
+            return redirect()->back()->withErrors([
+                'quantity' => "quantity may not be greater than the available stock (max {$item->quantity}"
+            ])->withInput();
+        }
+
+        BorrowRequest::create([
+            'borrower_id' => $user->id,
+            'quantity' => $validated['quantity'],
             'status' => 'processed',
-            'request_date' => $request->request_date,
-            'return_date' => $request->return_date,
-            'item_id' => $request->item_id,
+            'request_date' => now(),
+            'return_date' => $validated['return_date'],
+            'item_id' => $itemId,
         ]);
 
-        return redirect()->route('borrow-request.index')
+        return redirect()->route('item.item-list')
             ->with('success', 'Borrow request created successfully.');
     }
 
@@ -89,7 +96,6 @@ class BorrowRequestController extends Controller
     {
         $borrowRequest = BorrowRequest::findOrFail($id);
 
-        // Check if the request is processed
         if ($borrowRequest->status !== 'processed') {
             return back()->with('error', 'This request has already been processed.');
         }
@@ -99,17 +105,15 @@ class BorrowRequestController extends Controller
             return back()->with('error', "Item '{$item->name}' doesn't have enough quantity available.");
         }
 
-        // Update request status
         $borrowRequest->update([
             'status' => 'approved',
             'operator_id' => Auth::id()
         ]);
 
-        // Update item quantities and status
         $item->quantity -= $borrowRequest->quantity;
 
         if ($item->quantity <= 0) {
-            $item->status = 'not_available';
+            $item->status = 'unavailable';
         }
 
         $item->save();
@@ -124,12 +128,10 @@ class BorrowRequestController extends Controller
     {
         $borrowRequest = BorrowRequest::findOrFail($id);
 
-        // Check if the request is processed
         if ($borrowRequest->status !== 'processed') {
             return back()->with('error', 'This request has already been processed.');
         }
 
-        // Update request status
         $borrowRequest->update([
             'status' => 'rejected',
             'operator_id' => Auth::id()
@@ -145,24 +147,20 @@ class BorrowRequestController extends Controller
     {
         $borrowRequest = BorrowRequest::findOrFail($id);
 
-        // Check if the request is approved
         if ($borrowRequest->status !== 'approved') {
             return back()->with('error', 'Only approved requests can be marked as returned.');
         }
 
-        // Update request status
         $borrowRequest->update([
             'status' => 'returned',
             'operator_id' => Auth::id()
         ]);
 
-        // Return items to inventory
         $item = $borrowRequest->item;
         $item->quantity += $borrowRequest->quantity;
         $item->status = 'available';
         $item->save();
 
-        // Update request item status
         $borrowRequest->update(['status' => 'returned']);
 
         return back()->with('success', 'Items have been marked as returned successfully.');

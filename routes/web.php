@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('role:operator')->group(function () {
         Route::get('/itemOperator', [ItemController::class, 'index'])->name('item.indexOperator');
-        Route::resource('/borrow-request', BorrowRequestController::class);
+        Route::get('/borrow-request', [BorrowRequestController::class, 'index'])->name('borrow-request.index');
         Route::put('/borrow-request/{id}/approve', [BorrowRequestController::class, 'approve'])->name('borrow-request.approve');
         Route::put('/borrow-request/{id}/reject', [BorrowRequestController::class, 'reject'])->name('borrow-request.reject');
         Route::put('/borrow-request/{id}/return', [BorrowRequestController::class, 'markAsReturn'])->name('borrow-request.return');
@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:peminjam')->group(function () {
         Route::get('/home', [HomeController::class, 'indexHome'])->name('home');
         Route::get('/item-list', [ItemController::class, 'index'])->name('item.item-list');
+        Route::post('/borrow-request/{itemId}', [BorrowRequestController::class, 'store'])->name('borrow-request.store');
     });
 
     Route::post('/logout', [AuthController::class, 'logout']);
